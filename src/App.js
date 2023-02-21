@@ -8,12 +8,8 @@ import '@fontsource/roboto/700.css';
 function App() {
   return (
     <>
-        <Server />
-    
-    <div className="App">
-      <header className="App-header">
-      </header>
-    </div>
+      <Server />
+        
     </>
   );
 }
