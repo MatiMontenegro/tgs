@@ -1,26 +1,26 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
 
-var options = {
-  method: 'GET',
-};
-let product = [];
-let productMultimedia = [];
+function Server() {
+  const [gamesData, setGamesData] = useState(null);
 
-fetch('https://api.rawg.io/api/games?key=26d309e0e2914b0f9e16b1e15182e7fe&dates=2019-09-01,2019-09-30&platforms=18,1,7', options)
-.then(res => res.json())
-.then(res => console.log(res))
-.catch(err => console.error(err));
+  useEffect(() => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
 
-const {} = productMultimedia;
-const {name, genres, platforms, released, rating, stores} = product;
+    fetch('https://api.rawg.io/api/games?key=26d309e0e2914b0f9e16b1e15182e7fe&dates=2019-09-01,2019-09-30&platforms=18,1,7', options)
+      .then(response => response.json())
+      .then(data => {
+        setGamesData(data);
+      })
+      .catch(err => console.error(err));
+  }, []);
 
-    function Server() {
-      return (
-    <div>
-      <p>Top Games {name},{genres},{platforms}, {released} ,{rating} ,{stores} </p>
-      </div>
-    )
-  }
-  
-  
-  export default Server
+return (
+        gamesData ? console.log('Game Data Loaded') : console.log('Waiting for Loading')
+  )
+}
+export default Server
